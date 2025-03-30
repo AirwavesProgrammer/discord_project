@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsere Discord-Community</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+        }
+        h1 {
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            opacity: 0.8;
+        }
+        iframe {
+            border-radius: 10px;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #7289DA;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #5b6eae;
+        }
+        .language-switch {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #7289DA;
+            transition: .4s;
+            border-radius: 25px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "🇩🇪";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 2px;
+            transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: #5b6eae;
+        }
+        input:checked + .slider:before {
+            content: "🇬🇧";
+            transform: translateX(25px);
+        }
+        .social-icons {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #7289DA;
+        }
+
+        /* Position des Buttons in der rechten oberen Ecke */
+        .idea-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: inline-block;
+            padding: 10px 20px;
+            background: #7289DA;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .idea-button:hover {
+            background: #5b6eae;
+        }
+    </style>
+    <script>
+        function changeLanguage() {
+            const checkbox = document.getElementById("language-toggle");
+            const ideaButton = document.getElementById("idea-button");
+            
+            if (checkbox.checked) {
+                document.documentElement.lang = "en";
+                document.getElementById("title").innerText = "Welcome to our Community!";
+                document.getElementById("description").innerText = "Stay connected and get the latest updates on our Discord server.";
+                document.getElementById("join-button").innerText = "Join now";
+                ideaButton.innerText = "Submit Idea";  // Übersetzung des Buttons auf Englisch
+            } else {
+                document.documentElement.lang = "de";
+                document.getElementById("title").innerText = "Willkommen in unserer Community!";
+                document.getElementById("description").innerText = "Bleibe mit uns in Kontakt und erhalte die neuesten Updates in unserem Discord-Server.";
+                document.getElementById("join-button").innerText = "Jetzt beitreten";
+                ideaButton.innerText = "Idee einreichen";  // Übersetzung des Buttons auf Deutsch
+            }
+        }
+    </script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="language-switch">
+        <label class="switch">
+            <input type="checkbox" id="language-toggle" onchange="changeLanguage()">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <h1 id="title">Willkommen in unserer Community!</h1>
+    <p id="description">Bleibe mit uns in Kontakt und erhalte die neuesten Updates in unserem Discord-Server.</p>
+
+    <!-- "Idee einreichen" Button in der rechten oberen Ecke -->
+    <a href="submission.html" class="button idea-button" target="_blank" id="idea-button">Idee einreichen</a>
+
+    <div class="container">
+        <iframe src="https://discord.com/widget?id=1353778960080699403&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+    </div>
+    
+    <a href="https://discord.com/invite/YOUR_INVITE_LINK" class="button" target="_blank" id="join-button">Jetzt beitreten</a>
+
+    <div class="social-icons">
+        <a href="https://twitter.com/YOUR_TWITTER" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://facebook.com/YOUR_FACEBOOK" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+</body>
+</html>

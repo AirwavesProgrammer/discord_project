@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideen und Bilder einreichen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a2e;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #555;
+            color: white;
+            background: #333;
+            font-size: 14px;
+            height: 150px;
+            resize: none;
+        }
+        .button {
+            background: #7289DA;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .button:hover {
+            background: #5b6eae;
+        }
+        .upload-container {
+            margin-top: 30px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px dashed #7289DA;
+            background-color: #333;
+            transition: all 0.3s ease;
+        }
+        .upload-container:hover {
+            border-color: #5b6eae;
+            background-color: #444;
+        }
+        .upload-container input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .upload-text {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .upload-text span {
+            color: #7289DA;
+        }
+        .image-preview {
+            margin-top: 15px;
+            max-width: 100%;
+            height: auto;
+            display: none;
+            border-radius: 10px;
+            position: relative;
+        }
+        .remove-image-button {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            border: none;
+            display: none;
+        }
+        .remove-image-button:hover {
+            background-color: darkred;
+        }
+        .optional-note {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #ccc;
+        }
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background-color: #444;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background-color: #7289DA;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+        .language-switch {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #7289DA;
+            transition: .4s;
+            border-radius: 25px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "🇩🇪";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 2px;
+            transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: #5b6eae;
+        }
+        input:checked + .slider:before {
+            content: "🇬🇧";
+            transform: translateX(25px);
+        }
+        .success-message {
+            display: none;
+            background-color: #28a745;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="language-switch">
+        <label class="switch">
+            <input type="checkbox" id="language-toggle" onchange="changeLanguage()">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <div class="container">
+        <h1 id="title">Deine Idee und Bilder einreichen</h1>
+        <p id="description">Schreib uns deine Idee und lade ein Bild hoch, das wir in unserem Discord-Channel teilen sollen!</p>
+        <form id="ideaForm">
+            <textarea id="ideaText" placeholder="Gib hier deine Idee ein..."></textarea><br>
+
+            <div class="upload-container">
+                <input type="file" id="imageUpload" accept="image/*" onchange="showPreview(event)">
+                <div class="upload-text">
+                    <p><span>Drag & Drop</span> oder <span>klicke hier</span> um ein Bild auszuwählen</p>
+                </div>
+            </div>
+            <img id="imagePreview" class="image-preview" src="" alt="Vorschau des Bildes">
+            <button type="button" class="remove-image-button" id="removeImageButton" onclick="removeImage()">Bild entfernen</button>
+            
+            <button type="button" class="button" id="submitButton" onclick="submitIdea()">Absenden</button>
+            
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <p class="optional-note">Das Hochladen eines Bildes ist optional.</p>
+
+            <div class="success-message" id="successMessage">
+                Deine Idee und/oder das Bild wurden erfolgreich gesendet!
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function showPreview(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById("imagePreview");
+            const submitButton = document.getElementById("submitButton");
+            const removeImageButton = document.getElementById("removeImageButton");
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    preview.src = reader.result;
+                    preview.style.display = "block";
+                    submitButton.style.display = "inline-block";
+                    removeImageButton.style.display = "inline-block";
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeImage() {
+            document.getElementById("imageUpload").value = "";
+            document.getElementById("imagePreview").style.display = "none";
+            document.getElementById("submitButton").style.display = "inline-block"; // Always show submit button
+            document.getElementById("removeImageButton").style.display = "none";
+        }
+
+        function submitIdea() {
+            const idea = document.getElementById("ideaText").value;
+            const imageFile = document.getElementById("imageUpload").files[0];
+
+            if (idea.trim() === "" && !imageFile) {
+                alert("Bitte gib eine Idee ein oder lade ein Bild hoch.");
+                return;
+            }
+
+            let imageUrl = "";
+            if (imageFile) {
+                const formData = new FormData();
+                formData.append("image", imageFile);
+
+                const progressContainer = document.getElementById("progressContainer");
+                const progressBar = document.getElementById("progressBar");
+                progressContainer.style.display = "block";
+
+                fetch("https://api.imgbb.com/1/upload?key=899164d392d19481bb195e23a1e7df62", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    imageUrl = data.data.url;
+                    progressBar.style.width = "100%"; 
+                    sendToDiscord(idea, imageUrl);
+                })
+                .catch(error => {
+                    console.error("Error uploading image:", error);
+                    alert("Es gab einen Fehler beim Hochladen des Bildes.");
+                });
+            } else {
+                sendToDiscord(idea, "");
+            }
+        }
+
+        function sendToDiscord(idea, imageUrl) {
+            const webhookUrl = "https://discord.com/api/webhooks/1355978405325049956/dk6mtbVJ1u6HuH2uctqxgDifw6bg6qVG3Wm6QwAQMLcFPgpOJ6U-ltfYsFqYIrp08Lmu"; // Discord Webhook URL
+
+            const payload = {
+                content: `${idea}\nBild: ${imageUrl || 'Kein Bild hochgeladen'}`,
+            };
+
+            fetch(webhookUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("successMessage").style.display = "block";
+                setTimeout(() => {
+                    location.reload();
+                }, 3000);
+
+            })
+            .catch(error => {
+                console.error("Error sending to Discord:", error);
+                alert("Es gab einen Fehler beim Senden der Idee.");
+            });
+        }
+
+        function resetForm() {
+            document.getElementById("ideaText").value = "";
+            document.getElementById("imageUpload").value = "";
+            document.getElementById("imagePreview").style.display = "none";
+            document.getElementById("progressContainer").style.display = "none";
+            document.getElementById("progressBar").style.width = "0%";
+            document.getElementById("removeImageButton").style.display = "none";
+            document.getElementById("submitButton").style.display = "none";
+        }
+
+        function changeLanguage() {
+            const isChecked = document.getElementById("language-toggle").checked;
+            if (isChecked) {
+                document.getElementById("title").innerText = "Submit Your Idea and Image";
+                document.getElementById("description").innerText = "Write your idea and upload an image to share with our Discord community!";
+                document.querySelector(".upload-text p").innerHTML = '<span>Drag & Drop</span> or <span>Click here</span> to choose an image';
+                document.querySelector(".optional-note").innerText = "Uploading an image is optional.";
+                document.querySelector(".language-switch input").nextElementSibling.setAttribute("title", "Switch to German");
+            } else {
+                document.getElementById("title").innerText = "Deine Idee und Bilder einreichen";
+                document.getElementById("description").innerText = "Schreib uns deine Idee und lade ein Bild hoch, das wir in unserem Discord-Channel teilen sollen!";
+                document.querySelector(".upload-text p").innerHTML = '<span>Drag & Drop</span> oder <span>klicke hier</span> um ein Bild auszuwählen';
+                document.querySelector(".optional-note").innerText = "Das Hochladen eines Bildes ist optional.";
+                document.querySelector(".language-switch input").nextElementSibling.setAttribute("title", "Wechsle zu Englisch");
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+
+
