@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login mit Discord</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .button {
+            background: #7289DA;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background: #5b6eae;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login erforderlich</h1>
+        <p>Bitte melde dich mit Discord an, um Zugriff auf die Website zu erhalten.</p>
+        <a href="https://discord.com/api/oauth2/authorize?client_id=1356009347603501288&redirect_uri=https%3A%2F%2F%2Fauth&response_type=code&scope=identify%20guilds.join">
+            <button class="button">Mit Discord anmelden</button>
+        </a>
+    </div>
+</body>
+</html>
