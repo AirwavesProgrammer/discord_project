@@ -73,6 +73,25 @@
             0% { opacity: 0; transform: translateY(-20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
+        .cooldown-bar-container {
+            width: 100%;
+            background-color: #333;
+            border-radius: 5px;
+            height: 25px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .cooldown-bar {
+            height: 100%;
+            background-color: #5b6eae;
+            transition: width 1s ease-in-out;
+            border-radius: 5px;
+            color: white;
+            line-height: 25px;
+            font-weight: bold;
+            text-align: center;
+            padding: 0 5px;
+        }
         .language-switch {
             position: absolute;
             top: 15px;
@@ -137,13 +156,30 @@
             <div class="success-message" id="successMessage">
                 Deine Idee wurde erfolgreich gesendet!
             </div>
+            <div class="cooldown-bar-container" id="cooldownContainer" style="display:none;">
+                <div class="cooldown-bar" id="cooldownBar">5:00</div>
+            </div>
         </form>
     </div>
 
     <script>
         let currentLang = 'de';
         let cooldown = false;
-        let cooldownTime = 300;
+        let cooldownTime = 300; // 5 Minuten (300 Sekunden)
+        let remainingTime = localStorage.getItem('cooldownTime') ? parseInt(localStorage.getItem('cooldownTime')) : cooldownTime;
+
+        // Falls der Wert in localStorage negativ oder undefiniert ist, zurücksetzen
+        if (remainingTime < 0 || isNaN(remainingTime)) {
+            remainingTime = cooldownTime;
+        }
+
+        let countdownInterval;
+
+        // Start countdown if cooldown is active
+        if (remainingTime < cooldownTime) {
+            cooldown = true;
+            startCountdown();
+        }
 
         function toggleLanguage() {
             const translations = {
@@ -162,10 +198,8 @@
         function submitIdea() {
             if (cooldown) return;
             cooldown = true;
-            let remainingTime = cooldownTime;
             const button = document.getElementById("submitButton");
             button.disabled = true;
-
             const discordName = document.getElementById("discordName").value.trim();
             const idea = document.getElementById("ideaText").value.trim();
             const webhookUrl = "https://discord.com/api/webhooks/1355978405325049956/dk6mtbVJ1u6HuH2uctqxgDifw6bg6qVG3Wm6QwAQMLcFPgpOJ6U-ltfYsFqYIrp08Lmu";
@@ -188,19 +222,44 @@
                 alert("Es gab einen Fehler beim Senden der Idee.");
             });
 
-            const countdownInterval = setInterval(() => {
-                button.innerText = `${remainingTime}s`;
-                remainingTime--;
-                if (remainingTime < 0) {
+            remainingTime = cooldownTime;
+            startCountdown();
+        }
+
+        function startCountdown() {
+            const button = document.getElementById("submitButton");
+            const cooldownContainer = document.getElementById("cooldownContainer");
+            const cooldownBar = document.getElementById("cooldownBar");
+
+            const updateCooldownBar = () => {
+                let minutes = Math.floor(remainingTime / 60);
+                let seconds = remainingTime % 60;
+                let formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                cooldownBar.innerText = formattedTime;
+                cooldownBar.style.width = `${(remainingTime / cooldownTime) * 100}%`;
+                cooldownContainer.style.display = cooldown ? "block" : "none";
+                localStorage.setItem('cooldownTime', remainingTime); // Update cooldown in localStorage
+            }
+
+            countdownInterval = setInterval(() => {
+                if (remainingTime <= 0) {
                     clearInterval(countdownInterval);
                     cooldown = false;
                     button.disabled = false;
                     button.innerText = currentLang === 'de' ? "Absenden" : "Submit";
+                } else {
+                    remainingTime--;
+                    updateCooldownBar();
                 }
             }, 1000);
+
+            updateCooldownBar(); // Initial update
         }
     </script>
 </body>
 </html>
+
+
+
 
 
