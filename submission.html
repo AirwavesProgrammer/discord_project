@@ -137,7 +137,61 @@
             content: "🇬🇧";
             transform: translateX(25px);
         }
-    </style>
+
+    /* Allgemeine Verbesserungen für responsives Design */
+    body {
+        padding: 20px;
+    }
+
+    /* Sicherstellen, dass das Formular auf kleineren Bildschirmen besser passt */
+    .container {
+        width: 90%;
+        max-width: 600px; /* Für größere Bildschirme */
+    }
+
+    /* Kleinere Bildschirme (Smartphones) */
+    @media (max-width: 600px) {
+        body {
+            padding: 10px;
+        }
+
+        .container {
+            padding: 20px;
+            width: 95%;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        input, textarea, select {
+            font-size: 1rem;
+            padding: 8px;
+        }
+
+        .button {
+            font-size: 1rem;
+            padding: 8px 15px;
+        }
+    }
+
+    /* Tablets und mittlere Bildschirmgrößen */
+    @media (min-width: 601px) and (max-width: 1024px) {
+        .container {
+            width: 80%;
+            max-width: 500px;
+        }
+    }
+
+    /* Große Bildschirme */
+    @media (min-width: 1025px) {
+        .container {
+            width: 50%;
+            max-width: 700px;
+        }
+    }
+</style>
+
 </head>
 <body>
     <div class="language-switch">
