@@ -130,6 +130,39 @@
         .idea-button:hover {
             background: #5b6eae;
         }
+
+        /* Medienabfragen für kleinere Bildschirme */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 22px;
+            }
+            p {
+                font-size: 14px;
+            }
+            .container {
+                padding: 15px;
+            }
+            iframe {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .language-switch {
+                top: 10px;
+                left: 10px;
+            }
+            .idea-button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            .social-icons a {
+                font-size: 20px;
+            }
+            iframe {
+                height: 350px;
+            }
+        }
     </style>
     <script>
         function changeLanguage() {
