@@ -26,7 +26,7 @@
         h1 {
             margin-bottom: 20px;
         }
-        input, textarea {
+        input, textarea, select {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -151,6 +151,16 @@
         <p id="description">Gib deinen Discord-Namen ein und teile deine Idee mit uns!</p>
         <form id="ideaForm">
             <input type="text" id="discordName" placeholder="Dein Discord-Name" required><br>
+
+            <!-- Modernes Select-Menü -->
+            <select id="companyType" required>
+                <option id="select-placeholder" value="" disabled selected>Wähle einen Unternehmenstyp</option>
+                <option id="option-adac" value="adac">ADAC</option>
+                <option id="option-fire" value="feuerwehr">Feuerwehr bzw. Rettungsdienst</option>
+                <option id="option-bus" value="busunternehmen">Busunternehmen</option>
+                <option id="option-lkw" value="lkw-unternehmen">LKW-Unternehmen</option>
+            </select>
+
             <textarea id="ideaText" placeholder="Gib hier deine Idee ein..." required></textarea><br>
             <button type="button" class="button" id="submitButton" onclick="submitIdea()">Absenden</button>
             <div class="success-message" id="successMessage">
@@ -183,78 +193,148 @@
 
         function toggleLanguage() {
             const translations = {
-                de: { title: "Deine Idee einreichen", description: "Gib deinen Discord-Namen ein und teile deine Idee mit uns!", discordPlaceholder: "Dein Discord-Name", ideaPlaceholder: "Gib hier deine Idee ein...", submitButton: "Absenden", successMessage: "Deine Idee wurde erfolgreich gesendet!" },
-                en: { title: "Submit Your Idea", description: "Enter your Discord name and share your idea with us!", discordPlaceholder: "Your Discord Name", ideaPlaceholder: "Enter your idea here...", submitButton: "Submit", successMessage: "Your idea was successfully submitted!" }
+                de: { 
+                    title: "Deine Idee einreichen", 
+                    description: "Gib deinen Discord-Namen ein und teile deine Idee mit uns!", 
+                    discordPlaceholder: "Dein Discord-Name", 
+                    ideaPlaceholder: "Gib hier deine Idee ein...", 
+                    submitButton: "Absenden", 
+                    successMessage: "Deine Idee wurde erfolgreich gesendet!",
+                    selectPlaceholder: "Wähle einen Unternehmenstyp",
+                    adac: "ADAC",
+                    fire: "Feuerwehr bzw. Rettungsdienst",
+                    bus: "Busunternehmen",
+                    lkw: "LKW-Unternehmen"
+                },
+                en: { 
+                    title: "Submit Your Idea", 
+                    description: "Enter your Discord name and share your idea with us!", 
+                    discordPlaceholder: "Your Discord Name", 
+                    ideaPlaceholder: "Enter your idea here...", 
+                    submitButton: "Submit", 
+                    successMessage: "Your idea was successfully submitted!",
+                    selectPlaceholder: "Select a company type",
+                    adac: "ADAC",
+                    fire: "Fire Department / Emergency Services",
+                    bus: "Bus Company",
+                    lkw: "Truck Company"
+                }
             };
-            currentLang = currentLang === 'de' ? 'en' : 'de';
+
+            currentLang = currentLang === "de" ? "en" : "de";
+
             document.getElementById("title").innerText = translations[currentLang].title;
             document.getElementById("description").innerText = translations[currentLang].description;
             document.getElementById("discordName").placeholder = translations[currentLang].discordPlaceholder;
             document.getElementById("ideaText").placeholder = translations[currentLang].ideaPlaceholder;
             document.getElementById("submitButton").innerText = translations[currentLang].submitButton;
             document.getElementById("successMessage").innerText = translations[currentLang].successMessage;
+
+            // Select-Menü Übersetzung
+            document.getElementById("select-placeholder").innerText = translations[currentLang].selectPlaceholder;
+            document.getElementById("option-adac").innerText = translations[currentLang].adac;
+            document.getElementById("option-fire").innerText = translations[currentLang].fire;
+            document.getElementById("option-bus").innerText = translations[currentLang].bus;
+            document.getElementById("option-lkw").innerText = translations[currentLang].lkw;
         }
 
-        function submitIdea() {
-            if (cooldown) return;
-            cooldown = true;
-            const button = document.getElementById("submitButton");
-            button.disabled = true;
-            const discordName = document.getElementById("discordName").value.trim();
-            const idea = document.getElementById("ideaText").value.trim();
-            const webhookUrl = "https://discord.com/api/webhooks/1355978405325049956/dk6mtbVJ1u6HuH2uctqxgDifw6bg6qVG3Wm6QwAQMLcFPgpOJ6U-ltfYsFqYIrp08Lmu";
+    function submitIdea() {
+    if (cooldown) return;
+    cooldown = true;
+    const button = document.getElementById("submitButton");
+    button.disabled = true;
 
-            fetch(webhookUrl, { 
-                method: "POST", 
-                headers: { "Content-Type": "application/json" }, 
-                body: JSON.stringify({ content: `**Von:** ${discordName}\n**Idee:** ${idea}` })
-            })
-            .then(response => {
-                if (response.ok) {
-                    document.getElementById("successMessage").style.display = "block";
-                    setTimeout(() => document.getElementById("successMessage").style.display = "none", 4000);
-                } else {
-                    alert("Es gab einen Fehler beim Senden der Idee.");
-                }
-            })
-            .catch(error => {
-                console.error("Fehler beim Senden an Discord:", error);
-                alert("Es gab einen Fehler beim Senden der Idee.");
-            });
+    const discordName = document.getElementById("discordName").value.trim();
+    const idea = document.getElementById("ideaText").value.trim();
+    const companyType = document.getElementById("companyType").value;
 
-            remainingTime = cooldownTime;
-            startCountdown();
+    if (!companyType) {
+        alert(currentLang === 'de' ? "Bitte wähle einen Unternehmenstyp!" : "Please select a company type!");
+        button.disabled = false;
+        cooldown = false;
+        return;
+    }
+
+    // Übersetzungs-Map für Unternehmenstypen
+    const companyTranslations = {
+        "adac": { de: "ADAC", en: "ADAC" },
+        "feuerwehr": { de: "Feuerwehr bzw. Rettungsdienst", en: "Fire Department / Emergency Services" },
+        "busunternehmen": { de: "Busunternehmen", en: "Bus Company" },
+        "lkw-unternehmen": { de: "LKW-Unternehmen", en: "Truck Company" }
+    };
+
+    const selectedCompany = companyTranslations[companyType] ? companyTranslations[companyType][currentLang] : "Unbekannt";
+
+    const webhookUrl = "https://discord.com/api/webhooks/1355978405325049956/dk6mtbVJ1u6HuH2uctqxgDifw6bg6qVG3Wm6QwAQMLcFPgpOJ6U-ltfYsFqYIrp08Lmu";
+
+    fetch(webhookUrl, { 
+        method: "POST", 
+        headers: { "Content-Type": "application/json" }, 
+        body: JSON.stringify({ 
+            content: `**Von:** ${discordName}\n**Unternehmen:** ${selectedCompany}\n**Idee:** ${idea}` 
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            document.getElementById("successMessage").style.display = "block";
+
+            // **Neu: Formular leeren**
+            document.getElementById("ideaForm").reset();
+
+            setTimeout(() => document.getElementById("successMessage").style.display = "none", 4000);
+        } else {
+            alert(currentLang === 'de' ? "Es gab einen Fehler beim Senden der Idee." : "There was an error submitting your idea.");
         }
+    })
+    .catch(error => {
+        console.error("Fehler beim Senden an Discord:", error);
+        alert(currentLang === 'de' ? "Es gab einen Fehler beim Senden der Idee." : "There was an error submitting your idea.");
+    });
 
+    remainingTime = cooldownTime;
+    startCountdown();
+}
+        
         function startCountdown() {
             const button = document.getElementById("submitButton");
             const cooldownContainer = document.getElementById("cooldownContainer");
             const cooldownBar = document.getElementById("cooldownBar");
 
             const updateCooldownBar = () => {
-                let minutes = Math.floor(remainingTime / 60);
-                let seconds = remainingTime % 60;
-                let formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-                cooldownBar.innerText = formattedTime;
-                cooldownBar.style.width = `${(remainingTime / cooldownTime) * 100}%`;
-                cooldownContainer.style.display = cooldown ? "block" : "none";
-                localStorage.setItem('cooldownTime', remainingTime); // Update cooldown in localStorage
-            }
+            let minutes = Math.floor(remainingTime / 60);
+            let seconds = remainingTime % 60;
+            let formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            cooldownBar.innerText = formattedTime;
+            cooldownBar.style.width = `${(remainingTime / cooldownTime) * 100}%`;
+            cooldownContainer.style.display = cooldown ? "block" : "none";
+            localStorage.setItem('cooldownTime', remainingTime); // Cooldown speichern
+    };
 
-            countdownInterval = setInterval(() => {
-                if (remainingTime <= 0) {
-                    clearInterval(countdownInterval);
-                    cooldown = false;
-                    button.disabled = false;
-                    button.innerText = currentLang === 'de' ? "Absenden" : "Submit";
-                } else {
-                    remainingTime--;
-                    updateCooldownBar();
-                }
-            }, 1000);
-
-            updateCooldownBar(); // Initial update
+        countdownInterval = setInterval(() => {
+        if (remainingTime <= 0) {
+            clearInterval(countdownInterval);
+            cooldown = false;
+            button.disabled = false;
+            button.innerText = currentLang === 'de' ? "Absenden" : "Submit";
+            cooldownContainer.style.display = "none";
+            localStorage.removeItem('cooldownTime'); // Cooldown zurücksetzen
+        } else {
+            remainingTime--;
+            updateCooldownBar();
         }
+    }, 1000);
+    updateCooldownBar(); // Initiales Update
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+            const button = document.getElementById("submitButton");
+
+            if (remainingTime > 0 && remainingTime < cooldownTime) {
+                cooldown = true;
+                button.disabled = true;
+                startCountdown();
+            }
+        });
     </script>
 </body>
 </html>
