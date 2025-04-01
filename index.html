@@ -494,8 +494,8 @@
             text-align: center;
         }
 
-        hero-text {
-            display: none !important;
+        .hero-text {
+        display: none !important;
         }
     }
 
@@ -642,7 +642,6 @@
         }
         setTimeout(increaseCount, 500);
 
-        // Countdown für das nächste Event (Optional, für den Fall, dass du es später hinzufügen möchtest)
         function startCountdown() {
             let eventDate = new Date();
             eventDate.setDate(eventDate.getDate() + 7);
@@ -658,7 +657,6 @@
             }
             updateCountdown();
         }
-        // startCountdown(); // Falls du den Countdown für das Event aktivieren möchtest
     </script>
 </body>
 </html>
