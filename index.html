@@ -404,7 +404,7 @@
         }
         
         @media (max-width: 1024px) {
-        .hero-text {
+            .hero-text {
             font-size: 28px;
             padding: 15px 25px;
         }
@@ -412,56 +412,67 @@
         .menu {
             width: 200px; /* Kleineres Menü */
         }
-    }
+        }
 
         @media (max-width: 768px) {
-            .menu {
-            width: 100%; /* Menü über gesamte Breite */
-            right: 0;
+        header {
+            position: relative;
             text-align: center;
-            border-radius: 0;
         }
 
+        .discord-logo {
+            display: none; /* Versteckt das Logo auf mobilen Geräten */
+        }
+
+        /* Menü im mobilen Bereich */
+        .menu {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background-color: rgba(35, 57, 91, 0.9);
+            width: 250px;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 99;
+        }
+
+        /* Menü-Links für Mobilgeräte */
         .menu a {
-            padding: 12px;
-            font-size: 16px;
+            padding: 15px;
+            color: #EAEAEA;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
         }
 
-        .hero img {
-            height: 250px;
+        /* Menü anzeigen, wenn es geöffnet wird */
+        .menu.open {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .hero-text {
-            font-size: 24px;
-            width: 80%;
+        /* Hamburger-Icon in eine "X" umwandeln */
+        .menu-icon.open div:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
         }
 
-        .container {
-            padding: 20px;
+        .menu-icon.open div:nth-child(2) {
+            opacity: 0;
         }
 
-        .grid {
-            flex-direction: column;
-            gap: 15px;
+        .menu-icon.open div:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
-        .card {
-            flex: 1 1 100%;
-        }
-
-        .highlight {
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .highlight div {
-            width: 100%;
-        }
-
-        .menu-icon {
-            width: 30px;
-            top: 15px;
-            right: 15px;
+        /* Menüpunkte vergrößern beim Hover */
+        .menu a:hover {
+            transform: scale(1.1);
+            background-color: #00ADB5;
         }
     }
 
