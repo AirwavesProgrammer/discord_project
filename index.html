@@ -482,6 +482,12 @@
         .highlight {
             flex-direction: column; /* Elemente untereinander anordnen */
             gap: 15px; /* Abstand zwischen den Bereichen */
+            align-items: center; /* Zentriert die Boxen auf der Seite */
+        }
+
+        .highlight > div {
+            width: 100%; /* Volle Breite für mobiles Layout */
+            max-width: 400px; /* Optional: Maximale Breite für eine bessere Optik */
         }
     }
 
