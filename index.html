@@ -3,212 +3,639 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unsere Discord-Community</title>
+    <title>About Justice for EH</title>
     <style>
-        * {
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+    
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1A1A2E;
+            color: #EAEAEA;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
         }
-        body {
+
+        header {
+            background: linear-gradient(90deg, #0F3460, #16213E);
+            padding: 25px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #EAEAEA;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: white;
-            flex-direction: column;
-            text-align: center;
+        }
+
+        .discord-logo {
+            position: absolute;
+            left: 20px; /* Positioniere das Logo 20px von der linken Seite */
+            top: 50%;
+            transform: translateY(-50%); /* Vertikale Zentrierung */
+            width: 60px; /* Größe des Logos */
+            height: auto;
+        }
+
+        header .header-text {
             position: relative;
+            display: inline-block; /* Damit der Text zentriert wird */
         }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
+
+        header .header-text h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #EAEAEA;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px; /* Abstand zum Unterstrich */
         }
-        h1 {
-            margin-bottom: 10px;
-            font-size: 28px;
+
+        /* Attraktiver blauer Unterstrich */
+        header .header-text::after {
+            content: "";
+            display: block;
+            width: 0%;
+            height: 4px;
+            background-color: #00ADB5; /* Blauer Unterstrich */
+            margin: 0 auto;
+            transition: width 0.3s ease; /* Sanfte Transition beim Hover */
+            border-radius: 2px;
         }
-        p {
-            margin-bottom: 15px;
-            font-size: 16px;
-            opacity: 0.8;
+
+        /* Hover-Effekt für den Unterstrich */
+        header .header-text:hover::after {
+            width: 100%; /* Vergrößert den Unterstrich auf 100% der Breite */
         }
-        iframe {
+
+        /* Hamburger Menu Icon */
+        .menu-icon {
+            width: 35px;
+            height: 25px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100; /* Höherer z-index, damit das Icon über anderen Elementen ist */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Hamburger Menu Lines */
+        .menu-icon div {
+            height: 3px;
+            background-color: #EAEAEA;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Menü */
+        .menu {
+            position: absolute;
+            top: 80px; /* Position unter dem Header */
+            right: 20px;
+            background-color: rgba(35, 57, 91, 0.9); /* Leichte Transparenz */
+            width: 250px;
+            display: none;
             border-radius: 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 99; /* Menü sollte über anderem Inhalt, aber unter dem Icon sein */
         }
-        .button {
+
+        /* Menü Links */
+        .menu a {
+            display: block;
+            padding: 15px;
+            color: #EAEAEA;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Hover-Effekt für Links */
+        .menu a:hover {
+            transform: scale(1.1); /* Herauszoomen */
+            background-color: #00ADB5; /* Neue Hintergrundfarbe */
+        }
+
+        /* Menü anzeigen, wenn es geöffnet ist */
+        .menu.open {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hamburger Menu Animation (öffnet sich zu einem X) */
+        .menu-icon.open div:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px); /* Erstes Line wird zur oberen Ecke */
+        }
+
+        .menu-icon.open div:nth-child(2) {
+            opacity: 0; /* Zweite Linie verschwindet */
+        }
+
+        .menu-icon.open div:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px); /* Dritte Linie wird zur unteren Ecke */
+        }
+
+        /* Hover-Effekt auf das Menü-Icon */
+        .menu-icon:hover {
+            transform: scale(1.1);  /* Zoomt das Menü-Icon leicht */
+        }
+
+        /* Hover-Effekt auf die einzelnen Links */
+        .menu a:hover {
+        transform: scale(1.1); /* Herauszoomen */
+        background-color: #00ADB5; /* Hintergrundfarbe ändern */
+        }
+
+
+        /* Für die Mission Sektion */
+        .mission-section {
+            position: relative;
+            background: linear-gradient(135deg, #00ADB5 10%, #16213E 90%);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            color: #EAEAEA;
+            font-weight: bold;
+        }
+
+        .mission-section h2 {
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+
+        .mission-section p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #EAEAEA;
+        }
+
+        .mission-section .button {
             display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: #7289DA;
+            padding: 15px 30px;
+            margin-top: 20px;
+            background: #00ADB5;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
         }
-        .button:hover {
-            background: #5b6eae;
+
+        .mission-section .button:hover {
+            background: #008C95;
+            transform: scale(1.1);
+            border: 2px solid #00ADB5;
         }
-        .language-switch {
+        
+        .hero {
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 0 0 12px 12px;
+            display: block;
+        }
+
+        .hero-text {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            display: flex;
-            align-items: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            padding: 20px 30px;
+            background: rgba(0, 173, 181, 0.5);
+            border-radius: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
         }
-        .switch {
+
+        .hero-text .hover-underline {
+            font-size: 2rem;  /* Setzt die Schriftgröße */
+            color: #ffffff;  /* Textfarbe */
             position: relative;
             display: inline-block;
-            width: 50px;
-            height: 25px;
         }
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .slider {
+
+        .hero-text .hover-underline::after,
+        .hero-text .hover-underline::before {
+            content: '';
             position: absolute;
-            cursor: pointer;
-            top: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #ff0000, #00ffff);  /* Farbverlauf von Rot nach Cyan */
+            bottom: -5px;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #7289DA;
-            transition: .4s;
-            border-radius: 25px;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease-out;
+        }   
+
+        .hero-text .hover-underline::before {
+            top: -5px;
+        transform-origin: left;
         }
-        .slider:before {
+
+        .hero-text .hover-underline:hover::after,
+        .hero-text .hover-underline:hover::before {
+            transform: scaleX(1);  /* Aktiviert die Unterstreichung beim Hover */
+        }
+
+        .hero-text:hover {
+            background-color: rgba(0, 173, 181, 0.8);  /* Intensiviert die Hintergrundfarbe */
+            transform: translate(-50%, -50%) scale(1.05);  /* Skalierung bei Hover */
+        }
+
+        .hover-underline {
+            font-size: 2rem;
+            color: #ffffff;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hover-underline::after,
+        .hover-underline::before {
+            content: '';
             position: absolute;
-            content: "🇩🇪";
-            height: 20px;
-            width: 20px;
-            left: 4px;
-            bottom: 2px;
-            transition: .4s;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #ff0000, #00ffff);
+            bottom: -5px;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease-out;
         }
-        input:checked + .slider {
-            background-color: #5b6eae;
+
+        .hover-underline::before {
+            top: -5px;
+            transform-origin: left;
         }
-        input:checked + .slider:before {
-            content: "🇬🇧";
-            transform: translateX(25px);
+
+        .hover-underline:hover::after,
+        .hover-underline:hover::before {
+            transform: scaleX(1);
         }
-        .social-icons {
-            margin-top: 20px;
+    
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #16213E;
+            border-radius: 12px;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .grid {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: #23395B;
+            padding: 20px;
+            border-radius: 8px;
+            flex: 1 1 calc(50% - 10px);
+            transition: transform 0.3s ease, background 0.3s ease;
+            text-align: center;
+        }
+
+        .card:hover {
+            background: #1E2A47;
+            transform: scale(1.05);
+        }
+
+        .icon {
+            font-size: 40px;
+            color: #00ADB5;
+        }
+
+        .highlight {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .highlight div {
+            background: #23395B;
+            padding: 20px;
+            border-radius: 8px;
+            width: 45%;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ADB5;
+        }
+
+        /* Button Styling */
+        .button {
+            display: inline-flex;
+            align-items: center;  /* Vertikale Zentrierung */
+            justify-content: center;  /* Horizontale Zentrierung */
+            padding: 15px 25px;
+            margin-top: 30px;
+            background: #00ADB5;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .button:hover {
+            background: #008C95;
+            transform: scale(1.05);
+            box-shadow: 0px 5px 15px rgba(0, 173, 181, 0.5);
+        }
+
+        /* Discord Icon */
+        .button .discord-icon {
+            font-size: 24px; /* Größe des Discord-Icons */
+            transition: transform 0.3s ease;
+            margin-right: 12px;  /* Erhöhter Abstand zwischen Icon und Text */
+        }
+
+        /* Vergrößern des Discord-Icons beim Hover */
+        .button:hover .discord-icon {
+            transform: scale(1.1);  /* Leichtes Herauszoomen beim Hover */
+        }
+
+        /* Button Text */
+        .button span {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        /* Vergrößern des Textes beim Hover */
+        .button:hover span {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 1024px) {
+        .hero-text {
+            font-size: 28px;
+            padding: 15px 25px;
+        }
+
+        .menu {
+            width: 200px; /* Kleineres Menü */
+        }
+    }
+
+        @media (max-width: 768px) {
+            .menu {
+            width: 100%; /* Menü über gesamte Breite */
+            right: 0;
+            text-align: center;
+            border-radius: 0;
+        }
+
+        .menu a {
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .hero img {
+            height: 250px;
+        }
+
+        .hero-text {
+            font-size: 24px;
+            width: 80%;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .grid {
+            flex-direction: column;
             gap: 15px;
         }
-        .social-icons a {
-            color: white;
-            font-size: 24px;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .social-icons a:hover {
-            color: #7289DA;
+
+        .card {
+            flex: 1 1 100%;
         }
 
-        /* Position des Buttons in der rechten oberen Ecke */
-        .idea-button {
-            position: absolute;
+        .highlight {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .highlight div {
+            width: 100%;
+        }
+
+        .menu-icon {
+            width: 30px;
             top: 15px;
             right: 15px;
-            display: inline-block;
-            padding: 10px 20px;
-            background: #7289DA;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
         }
-        .idea-button:hover {
-            background: #5b6eae;
+    }
+
+    @media (max-width: 480px) {
+        header {
+            padding: 20px;
+            font-size: 24px;
         }
 
-        /* Medienabfragen für kleinere Bildschirme */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 22px;
-            }
-            p {
-                font-size: 14px;
-            }
-            .container {
-                padding: 15px;
-            }
-            iframe {
-                height: 400px;
-            }
+        .hero img {
+            height: 200px;
         }
 
-        @media (max-width: 480px) {
-            .language-switch {
-                top: 10px;
-                left: 10px;
-            }
-            .idea-button {
-                font-size: 14px;
-                padding: 8px 16px;
-            }
-            .social-icons a {
-                font-size: 20px;
-            }
-            iframe {
-                height: 350px;
-            }
+        .hero-text {
+            font-size: 20px;
+            padding: 10px 15px;
         }
-    </style>
-    <script>
-        function changeLanguage() {
-            const checkbox = document.getElementById("language-toggle");
-            const ideaButton = document.getElementById("idea-button");
-            
-            if (checkbox.checked) {
-                document.documentElement.lang = "en";
-                document.getElementById("title").innerText = "Welcome to our Community!";
-                document.getElementById("description").innerText = "Stay connected and get the latest updates on our Discord server.";
-                document.getElementById("join-button").innerText = "Join now";
-                ideaButton.innerText = "Submit Idea";  // Übersetzung des Buttons auf Englisch
-            } else {
-                document.documentElement.lang = "de";
-                document.getElementById("title").innerText = "Willkommen in unserer Community!";
-                document.getElementById("description").innerText = "Bleibe mit uns in Kontakt und erhalte die neuesten Updates in unserem Discord-Server.";
-                document.getElementById("join-button").innerText = "Jetzt beitreten";
-                ideaButton.innerText = "Idee einreichen";  // Übersetzung des Buttons auf Deutsch
-            }
+
+        .mission-section h2 {
+            font-size: 28px;
         }
-    </script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+        .mission-section p {
+            font-size: 16px;
+        }
+
+        .button {
+            font-size: 16px;
+            padding: 12px 20px;
+        }
+
+        .menu-icon {
+            width: 28px;
+        }
+    }
+    </style>    
 </head>
-<body>
-    <div class="language-switch">
-        <label class="switch">
-            <input type="checkbox" id="language-toggle" onchange="changeLanguage()">
-            <span class="slider"></span>
-        </label>
-    </div>
-    <h1 id="title">Willkommen in unserer Community!</h1>
-    <p id="description">Bleibe mit uns in Kontakt und erhalte die neuesten Updates in unserem Discord-Server.</p>
 
-    <!-- "Idee einreichen" Button in der rechten oberen Ecke -->
-    <a href="submission.html" class="button idea-button" id="idea-button">Idee einreichen</a>
+<body>
+    <header>
+        <img src="https://media.discordapp.net/attachments/1353786567810089051/1356356039980879942/Logo.png?ex=67eced3f&is=67eb9bbf&hm=c4647d2902b2547e70ae5d3a6d1f9a3bfb0d9cc2d6fe6aa3e61a8d6f4b779302&=&format=webp&quality=lossless&width=908&height=908" alt="Discord Logo" class="discord-logo">
+        <div class="header-text">
+            <h1>Gerechtigkeit für EH</h1>
+        </div>
+    </header>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- Hamburger Menu Icon -->
+    <div class="menu-icon">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Menü -->
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="server.html">Serverinfo</a>
+        <a href="submission.html">Idee einreichen</a>
+        <a href="#contact">Kontakt</a>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Femergency-hamburg.com%2Fimg%2Fplay-card.png&f=1&nofb=1&ipt=3133b1d55a3c69391c1448eb3fcdd032130616a4230117dbd12121cbafbdea79&ipo=images" alt="Protest Banner">
+        <div class="hero-text">
+            <span class="hover-underline">Zusammen für Gerechtigkeit</span>
+        </div>
+    </div>
 
     <div class="container">
-        <iframe src="https://discord.com/widget?id=1353778960080699403&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-    </div>
-    
-    <a href="https://discord.gg/zAgSXxrsag" class="button" target="_blank" id="join-button">Jetzt beitreten</a>
+        <div class="mission-section">
+            <h2>Unsere Mission</h2>
+            <p>Wir setzen uns in Notruf Hamburg für mehr Inhalte für vernachlässigte Jobs wie ADAC, LKW-Fahrer, Feuerwehr und Busfahrer ein. Wir glauben, dass jeder in seiner Arbeit Anerkennung und Respekt verdient!</p>
+            <a href="https://discord.gg/8BEkPkjtKe" class="button" target="_blank">Jetzt mitmachen</a>
+        </div>
 
-    <div class="social-icons">
-        <a href="https://twitter.com/YOUR_TWITTER" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://facebook.com/YOUR_FACEBOOK" target="_blank"><i class="fab fa-facebook"></i></a>
+        <h3 class="hover-underline">Warum solltest du mitmachen?</h3>
+        <div class="grid">
+            <div class="card">
+                <div class="icon">🔥</div>
+                <h4>Regelmäßige Events</h4>
+                <p>Wir organisieren spannende Proteste & Demos.</p>
+            </div>
+            <div class="card">
+                <div class="icon">⚖️</div>
+                <h4>Gerechtigkeit</h4>
+                <p>Wir setzen uns für alle Spieler ein.</p>
+            </div>
+            <div class="card">
+                <div class="icon">💡</div>
+                <h4>Neue Ideen</h4>
+                <p>Gemeinsam entwickeln wir Konzepte für bessere Features.</p>
+            </div>
+            <div class="card">
+                <div class="icon">📱</div>
+                <h4>Verbreitung auf Social Media</h4>
+                <p>Unsere Proteste gewinnen immer mehr Aufmerksamkeit in den sozialen Medien.</p>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <div>
+                <h3>Nächstes Event startet in:</h3>
+                <div id="countdown">Lädt...</div>
+            </div>
+            <div>
+                <h3>Unsere Community:</h3>
+                <p>Wir sind bereits <span id="counter">0</span> Mitglieder stark!</p>
+            </div>
+        </div>
+
+        <a class="button" href="https://discord.gg/8BEkPkjtKe" target="_blank">
+            <i class="fab fa-discord discord-icon"></i> <!-- Discord Icon -->
+            <span>Jetzt beitreten</span>
+        </a>
     </div>
+
+    <script>
+        let count = 50; // Wir erhöhen bis 50+
+
+        // Menu toggle
+        document.querySelector('.menu-icon').addEventListener('click', function () {
+        const menu = document.querySelector('.menu');
+        const icon = document.querySelector('.menu-icon');
+
+        // Toggle the menu visibility
+        menu.classList.toggle('open');
+    
+        // Toggle the icon transformation (hamburger to X)
+        icon.classList.toggle('open');
+        });
+
+        // Mitgliederzähler (simulierte Erhöhung bis 50+)
+        function increaseCount() {
+            let counter = document.getElementById("counter");
+            let current = parseInt(counter.innerText);
+            if (current < count) {
+                counter.innerText = current + 1;
+                setTimeout(increaseCount, 50);
+            } else {
+                counter.innerText = "50+";
+            }
+        }
+        setTimeout(increaseCount, 500);
+
+        // Countdown für das nächste Event (Optional, für den Fall, dass du es später hinzufügen möchtest)
+        function startCountdown() {
+            let eventDate = new Date();
+            eventDate.setDate(eventDate.getDate() + 7);
+            function updateCountdown() {
+                let now = new Date().getTime();
+                let distance = eventDate - now;
+                let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                setTimeout(updateCountdown, 1000);
+            }
+            updateCountdown();
+        }
+        // startCountdown(); // Falls du den Countdown für das Event aktivieren möchtest
+    </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
