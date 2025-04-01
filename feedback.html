@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedbackformular</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1); /* Transparenter Container */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 80%;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-container:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #333;
+            color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            border-color: #7289DA;
+            outline: none;
+        }
+
+        button {
+            background-color: #7289DA;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #5b6eae;
+        }
+
+        button:disabled {
+            background-color: #bbb;
+            cursor: not-allowed;
+        }
+
+        textarea {
+            height: 120px;  /* Reduzierte Höhe für Textarea */
+            resize: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Website-Feedback</h2>
+        <form id="feedbackForm">
+            <label for="design">Design der Website:</label>
+            <select id="design" name="design">
+                <option value="5">5 - Ausgezeichnet</option>
+                <option value="4">4 - Gut</option>
+                <option value="3">3 - Durchschnittlich</option>
+                <option value="2">2 - Schlecht</option>
+                <option value="1">1 - Sehr schlecht</option>
+            </select>
+
+            <label for="usability">Benutzerfreundlichkeit:</label>
+            <select id="usability" name="usability">
+                <option value="5">5 - Ausgezeichnet</option>
+                <option value="4">4 - Gut</option>
+                <option value="3">3 - Durchschnittlich</option>
+                <option value="2">2 - Schlecht</option>
+                <option value="1">1 - Sehr schlecht</option>
+            </select>
+
+            <label for="bugs">Bugs melden:</label>
+            <textarea id="bugs" name="bugs" placeholder="Beschreibe gefundene Fehler..."></textarea>
+
+            <label for="ideas">Ideen für Verbesserungen:</label>
+            <textarea id="ideas" name="ideas" placeholder="Hast du Vorschläge zur Verbesserung?"></textarea>
+
+            <label for="feedback">Zusätzliches Feedback:</label>
+            <textarea id="feedback" name="feedback" placeholder="Dein Feedback..." required></textarea>
+
+            <label for="name">Dein Name (optional):</label>
+            <input type="text" id="name" name="name">
+
+            <button type="submit">Feedback senden</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Verhindert die Standardformularübermittlung
+
+            // Hole die Formulardaten
+            const formData = new FormData(e.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Discord Webhook URL
+            const webhookUrl = 'https://discord.com/api/webhooks/1356703017088319669/zTYMJpHQY503rZcVvDe-k3k2ttsF4EFH5CKRNY0auja7gFtnEI0vao67rDPScB-BGy5d';  // Ersetze dies mit deiner Webhook-URL
+
+            // Bereite die Nachricht für Discord vor
+            const message = {
+                "content": "Neues Feedback erhalten!",
+                "embeds": [{
+                    "title": "Feedback Details",
+                    "color": 3066993,
+                    "fields": [
+                        { "name": "Design", "value": `${data['design']}/5` },
+                        { "name": "Benutzerfreundlichkeit", "value": `${data['usability']}/5` },
+                        { "name": "Bugs gemeldet", "value": data['bugs'] || "Keine Bugs gemeldet" },
+                        { "name": "Ideen für Verbesserungen", "value": data['ideas'] || "Keine Ideen" },
+                        { "name": "Zusätzliches Feedback", "value": data['feedback'] },
+                        { "name": "Name", "value": data['name'] || "Anonym" }
+                    ]
+                }]
+            };
+
+            // Sende die Daten an Discord per Webhook
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(message)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Feedback erfolgreich gesendet!");
+                    e.target.reset(); // Formular zurücksetzen
+                } else {
+                    alert("Es gab ein Problem beim Senden deines Feedbacks.");
+                }
+            })
+            .catch(error => {
+                console.error("Fehler:", error);
+                alert("Fehler beim Senden des Feedbacks.");
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
