@@ -22,6 +22,7 @@
             flex-direction: column;
             text-align: center;
             position: relative;
+            padding: 0 10px; /* Padding für kleinere Geräte */
         }
 
         .form-container {
@@ -29,8 +30,8 @@
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
             max-width: 600px;
-            width: 80%;
             transition: all 0.3s ease-in-out;
         }
 
@@ -97,6 +98,48 @@
             resize: none;
         }
 
+        /* Media Queries für verschiedene Bildschirmgrößen */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.8rem; /* Kleinere Schriftgröße für Tablets */
+            }
+
+            select, input, textarea {
+                font-size: 0.9rem; /* Etwas kleinere Schriftgrößen für mobile Geräte */
+                padding: 8px; /* Weniger Padding für kleinere Geräte */
+            }
+
+            button {
+                font-size: 1rem; /* Kleinere Schriftgröße für den Button */
+                padding: 8px 18px; /* Weniger Padding für den Button */
+            }
+
+            .form-container {
+                max-width: 90%; /* Container soll fast die ganze Breite einnehmen */
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.6rem; /* Noch kleinere Schriftgröße für kleinere Bildschirme */
+            }
+
+            select, input, textarea {
+                font-size: 0.85rem; /* Kleinere Schriftgröße für noch kleinere Bildschirme */
+                padding: 6px; /* Weniger Padding */
+            }
+
+            button {
+                font-size: 0.95rem;
+                padding: 6px 16px; /* Weniger Padding für den Button */
+            }
+
+            .form-container {
+                max-width: 95%; /* Fast die gesamte Breite auf sehr kleinen Bildschirmen */
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -149,7 +192,7 @@
             });
 
             // Discord Webhook URL
-            const webhookUrl = 'https://discord.com/api/webhooks/1356703017088319669/zTYMJpHQY503rZcVvDe-k3k2ttsF4EFH5CKRNY0auja7gFtnEI0vao67rDPScB-BGy5d';  // Ersetze dies mit deiner Webhook-URL
+            const webhookUrl = 'https://discord.com/api/webhooks/123456789012345678/abcdefgHIJKLMNOPQrstuvwxyz';  // Ersetze dies mit deiner Webhook-URL
 
             // Bereite die Nachricht für Discord vor
             const message = {
@@ -192,6 +235,7 @@
     </script>
 </body>
 </html>
+
 
 
 
