@@ -177,6 +177,76 @@
             /* Für größere Bildschirme */
         }
 
+        /* Hamburger Menu Icon */
+        .menu-icon {
+            width: 35px;
+            height: 25px;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-icon div {
+            height: 3px;
+            background-color: #EAEAEA;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Menü */
+        .menu {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: rgba(35, 57, 91, 0.9);
+            width: 250px;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .menu a {
+            display: block;
+            padding: 15px;
+            color: #EAEAEA;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .menu a:hover {
+            transform: scale(1.1);
+            background-color: #00ADB5;
+        }
+
+        .menu.open {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* JavaScript-Animationen für das Hamburger-Icon */
+        .menu-icon.open div:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-icon.open div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-icon.open div:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
         /* Kleinere Bildschirme (Smartphones) */
         @media (max-width: 600px) {
             body {
@@ -231,6 +301,22 @@
             <span class="slider"></span>
         </label>
     </div>
+
+    <!-- Hamburger Menu Icon -->
+    <div class="menu-icon" id="menuIcon">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Menü -->
+    <div class="menu" id="menu">
+        <a href="index.html" id="menu-home">Homepage</a>
+        <a href="server.html" id="menu-server">Serverinfo</a>
+        <a href="submission.html" id="menu-submission">Idee einreichen</a>
+        <a href="feedback.html" id="menu-feedback">Feedback</a>
+    </div>
+
     <div class="container">
         <h1 id="title">Deine Idee einreichen</h1>
         <p id="description">Gib deinen Discord-Namen ein und teile deine Idee mit uns!</p>
@@ -261,6 +347,7 @@
         let currentLang = 'de';
         let cooldown = false;
         let cooldownTime = 300; // 5 Minuten (300 Sekunden)
+        
         let remainingTime = localStorage.getItem('cooldownTime') ? parseInt(localStorage.getItem('cooldownTime')) : cooldownTime;
 
         // Falls der Wert in localStorage negativ oder undefiniert ist, zurücksetzen
@@ -289,7 +376,11 @@
                     adac: "ADAC",
                     fire: "Feuerwehr bzw. Rettungsdienst",
                     bus: "Busunternehmen",
-                    lkw: "LKW-Unternehmen"
+                    lkw: "LKW-Unternehmen",
+                    menuHome: "Homepage",
+                    menuServer: "Serverinfo",
+                    menuSubmission: "Idee einreichen",
+                    menuFeedback: "Feedback"
                 },
                 en: {
                     title: "Submit Your Idea",
@@ -302,7 +393,11 @@
                     adac: "ADAC",
                     fire: "Fire Department / Emergency Services",
                     bus: "Bus Company",
-                    lkw: "Truck Company"
+                    lkw: "Truck Company",
+                    menuHome: "Homepage",
+                    menuServer: "About Server",
+                    menuSubmission: "Submit Idea",
+                    menuFeedback: "Feedback"
                 }
             };
 
@@ -321,6 +416,11 @@
             document.getElementById("option-fire").innerText = translations[currentLang].fire;
             document.getElementById("option-bus").innerText = translations[currentLang].bus;
             document.getElementById("option-lkw").innerText = translations[currentLang].lkw;
+
+            document.getElementById("menu-home").innerText = translations[currentLang].menuHome;
+            document.getElementById("menu-server").innerText = translations[currentLang].menuServer;
+            document.getElementById("menu-submission").innerText = translations[currentLang].menuSubmission;
+            document.getElementById("menu-feedback").innerText = translations[currentLang].menuFeedback;
         }
 
         function submitIdea() {
@@ -349,10 +449,9 @@
             };
 
             const selectedCompany = companyTranslations[companyType] ? companyTranslations[companyType][currentLang] : "Unbekannt";
+            const webhookURL1 = process.env.REACT_APP_DISCORD_WEBHOOK_URL_1;
 
-            const webhookUrl = "https://discord.com/api/webhooks/1355978405325049956/dk6mtbVJ1u6HuH2uctqxgDifw6bg6qVG3Wm6QwAQMLcFPgpOJ6U-ltfYsFqYIrp08Lmu";
-
-            fetch(webhookUrl, {
+            fetch(webhookURL1, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -419,6 +518,11 @@
                 button.disabled = true;
                 startCountdown();
             }
+        });
+
+        document.getElementById("menuIcon").addEventListener("click", function () {
+            this.classList.toggle("open");
+            document.getElementById("menu").classList.toggle("open");
         });
     </script>
 </body>

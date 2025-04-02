@@ -448,7 +448,7 @@
             });
 
             // Discord Webhook URL
-            const webhookUrl = 'https://discord.com/api/webhooks/1356703017088319669/zTYMJpHQY503rZcVvDe-k3k2ttsF4EFH5CKRNY0auja7gFtnEI0vao67rDPScB-BGy5d';  // Ersetze dies mit deiner Webhook-URL
+            const webhookURL2 = process.env.REACT_APP_DISCORD_WEBHOOK_URL_2;
 
             // Bereite die Nachricht für Discord vor
             const message = {
@@ -468,7 +468,7 @@
             };
 
             // Sende die Daten an Discord per Webhook
-            fetch(webhookUrl, {
+            fetch(webhookURL2, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
