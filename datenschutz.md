@@ -1,6 +1,6 @@
 # Privacy Policy
 
-This website is provided exclusively for the private use of members of the Justice for EH Discordserver (the link is provided on the website). **No personal data is collected**, unless voluntarily provided through the contact form. The contact form only collects the **Discord username** of the user, which is forwarded to the Discord server.
+This website is provided exclusively for the private use of members of the Justice for EH Discordserver (the link is provided on the website). **No personal data is collected**, unless voluntarily provided through the contact form. The submission form in submission.html only collects the **Discord username** of the user, which is forwarded to the Discord server.
 
 The use of the website is anonymous and does not require the input of personal data.
 
