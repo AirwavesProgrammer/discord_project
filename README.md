@@ -1,4 +1,4 @@
-# Projektname
+# Gerechtigkeit für EH
 
 Dies ist ein nicht-kommerzielles Hobbyprojekt, das ausschließlich zu privaten und nicht-gewinnorientierten Zwecken bereitgestellt wird. Der Code wurde erstellt, um eine Plattform für die Community zu bieten und soll keine kommerziellen Interessen verfolgen.
 
