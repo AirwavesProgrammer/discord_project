@@ -449,7 +449,7 @@
             };
 
             const selectedCompany = companyTranslations[companyType] ? companyTranslations[companyType][currentLang] : "Unbekannt";
-            const webhookURL1 = process.env.REACT_APP_DISCORD_WEBHOOK_URL_1;
+            const webhookURL1 = process.env.REACT_APP_DISCORD_WEBHOOK_URL;
 
             fetch(webhookURL1, {
                 method: "POST",
