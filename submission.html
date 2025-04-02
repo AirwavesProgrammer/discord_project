@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
             text-align: center;
             flex-direction: column;
         }
+
         .container {
             background: rgba(255, 255, 255, 0.1);
             padding: 30px;
@@ -23,10 +25,14 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             width: 400px;
         }
+
         h1 {
             margin-bottom: 20px;
         }
-        input, textarea, select {
+
+        input,
+        textarea,
+        select {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -37,6 +43,7 @@
             font-size: 14px;
             resize: none;
         }
+
         .button {
             background: #7289DA;
             color: white;
@@ -48,13 +55,16 @@
             cursor: pointer;
             border: none;
         }
+
         .button:hover {
             background: #5b6eae;
         }
+
         .button:disabled {
             background: #555;
             cursor: not-allowed;
         }
+
         .success-message {
             display: none;
             background-color: #28a745;
@@ -69,10 +79,19 @@
             margin: 20px auto;
             text-align: center;
         }
+
         @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(-20px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         .cooldown-bar-container {
             width: 100%;
             background-color: #333;
@@ -81,6 +100,7 @@
             margin-top: 20px;
             overflow: hidden;
         }
+
         .cooldown-bar {
             height: 100%;
             background-color: #5b6eae;
@@ -92,6 +112,7 @@
             text-align: center;
             padding: 0 5px;
         }
+
         .language-switch {
             position: absolute;
             top: 15px;
@@ -99,17 +120,20 @@
             display: flex;
             align-items: center;
         }
+
         .switch {
             position: relative;
             display: inline-block;
             width: 50px;
             height: 25px;
         }
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
+
         .slider {
             position: absolute;
             cursor: pointer;
@@ -121,6 +145,7 @@
             transition: .4s;
             border-radius: 25px;
         }
+
         .slider:before {
             position: absolute;
             content: "🇩🇪";
@@ -130,69 +155,75 @@
             bottom: 2px;
             transition: .4s;
         }
-        input:checked + .slider {
+
+        input:checked+.slider {
             background-color: #5b6eae;
         }
-        input:checked + .slider:before {
+
+        input:checked+.slider:before {
             content: "🇬🇧";
             transform: translateX(25px);
         }
 
-    /* Allgemeine Verbesserungen für responsives Design */
-    body {
-        padding: 20px;
-    }
-
-    /* Sicherstellen, dass das Formular auf kleineren Bildschirmen besser passt */
-    .container {
-        width: 90%;
-        max-width: 600px; /* Für größere Bildschirme */
-    }
-
-    /* Kleinere Bildschirme (Smartphones) */
-    @media (max-width: 600px) {
+        /* Allgemeine Verbesserungen für responsives Design */
         body {
-            padding: 10px;
-        }
-
-        .container {
             padding: 20px;
-            width: 95%;
         }
 
-        h1 {
-            font-size: 1.5rem;
-        }
-
-        input, textarea, select {
-            font-size: 1rem;
-            padding: 8px;
-        }
-
-        .button {
-            font-size: 1rem;
-            padding: 8px 15px;
-        }
-    }
-
-    /* Tablets und mittlere Bildschirmgrößen */
-    @media (min-width: 601px) and (max-width: 1024px) {
+        /* Sicherstellen, dass das Formular auf kleineren Bildschirmen besser passt */
         .container {
-            width: 80%;
-            max-width: 500px;
+            width: 90%;
+            max-width: 600px;
+            /* Für größere Bildschirme */
         }
-    }
 
-    /* Große Bildschirme */
-    @media (min-width: 1025px) {
-        .container {
-            width: 50%;
-            max-width: 700px;
+        /* Kleinere Bildschirme (Smartphones) */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            input,
+            textarea,
+            select {
+                font-size: 1rem;
+                padding: 8px;
+            }
+
+            .button {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
         }
-    }
-</style>
+
+        /* Tablets und mittlere Bildschirmgrößen */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .container {
+                width: 80%;
+                max-width: 500px;
+            }
+        }
+
+        /* Große Bildschirme */
+        @media (min-width: 1025px) {
+            .container {
+                width: 50%;
+                max-width: 700px;
+            }
+        }
+    </style>
 
 </head>
+
 <body>
     <div class="language-switch">
         <label class="switch">
@@ -247,12 +278,12 @@
 
         function toggleLanguage() {
             const translations = {
-                de: { 
-                    title: "Deine Idee einreichen", 
-                    description: "Gib deinen Discord-Namen ein und teile deine Idee mit uns!", 
-                    discordPlaceholder: "Dein Discord-Name", 
-                    ideaPlaceholder: "Gib hier deine Idee ein...", 
-                    submitButton: "Absenden", 
+                de: {
+                    title: "Deine Idee einreichen",
+                    description: "Gib deinen Discord-Namen ein und teile deine Idee mit uns!",
+                    discordPlaceholder: "Dein Discord-Name",
+                    ideaPlaceholder: "Gib hier deine Idee ein...",
+                    submitButton: "Absenden",
                     successMessage: "Deine Idee wurde erfolgreich gesendet!",
                     selectPlaceholder: "Wähle einen Unternehmenstyp",
                     adac: "ADAC",
@@ -260,12 +291,12 @@
                     bus: "Busunternehmen",
                     lkw: "LKW-Unternehmen"
                 },
-                en: { 
-                    title: "Submit Your Idea", 
-                    description: "Enter your Discord name and share your idea with us!", 
-                    discordPlaceholder: "Your Discord Name", 
-                    ideaPlaceholder: "Enter your idea here...", 
-                    submitButton: "Submit", 
+                en: {
+                    title: "Submit Your Idea",
+                    description: "Enter your Discord name and share your idea with us!",
+                    discordPlaceholder: "Your Discord Name",
+                    ideaPlaceholder: "Enter your idea here...",
+                    submitButton: "Submit",
                     successMessage: "Your idea was successfully submitted!",
                     selectPlaceholder: "Select a company type",
                     adac: "ADAC",
@@ -292,95 +323,95 @@
             document.getElementById("option-lkw").innerText = translations[currentLang].lkw;
         }
 
-    function submitIdea() {
-    if (cooldown) return;
-    cooldown = true;
-    const button = document.getElementById("submitButton");
-    button.disabled = true;
+        function submitIdea() {
+            if (cooldown) return;
+            cooldown = true;
+            const button = document.getElementById("submitButton");
+            button.disabled = true;
 
-    const discordName = document.getElementById("discordName").value.trim();
-    const idea = document.getElementById("ideaText").value.trim();
-    const companyType = document.getElementById("companyType").value;
+            const discordName = document.getElementById("discordName").value.trim();
+            const idea = document.getElementById("ideaText").value.trim();
+            const companyType = document.getElementById("companyType").value;
 
-    if (!companyType) {
-        alert(currentLang === 'de' ? "Bitte wähle einen Unternehmenstyp!" : "Please select a company type!");
-        button.disabled = false;
-        cooldown = false;
-        return;
-    }
+            if (!companyType) {
+                alert(currentLang === 'de' ? "Bitte wähle einen Unternehmenstyp!" : "Please select a company type!");
+                button.disabled = false;
+                cooldown = false;
+                return;
+            }
 
-    // Übersetzungs-Map für Unternehmenstypen
-    const companyTranslations = {
-        "adac": { de: "ADAC", en: "ADAC" },
-        "feuerwehr": { de: "Feuerwehr bzw. Rettungsdienst", en: "Fire Department / Emergency Services" },
-        "busunternehmen": { de: "Busunternehmen", en: "Bus Company" },
-        "lkw-unternehmen": { de: "LKW-Unternehmen", en: "Truck Company" }
-    };
+            // Übersetzungs-Map für Unternehmenstypen
+            const companyTranslations = {
+                "adac": { de: "ADAC", en: "ADAC" },
+                "feuerwehr": { de: "Feuerwehr bzw. Rettungsdienst", en: "Fire Department / Emergency Services" },
+                "busunternehmen": { de: "Busunternehmen", en: "Bus Company" },
+                "lkw-unternehmen": { de: "LKW-Unternehmen", en: "Truck Company" }
+            };
 
-    const selectedCompany = companyTranslations[companyType] ? companyTranslations[companyType][currentLang] : "Unbekannt";
+            const selectedCompany = companyTranslations[companyType] ? companyTranslations[companyType][currentLang] : "Unbekannt";
 
-    const webhookUrl = "https://discord.com/api/webhooks/1355978405325049956/dk6mtbVJ1u6HuH2uctqxgDifw6bg6qVG3Wm6QwAQMLcFPgpOJ6U-ltfYsFqYIrp08Lmu";
+            const webhookUrl = "https://discord.com/api/webhooks/1355978405325049956/dk6mtbVJ1u6HuH2uctqxgDifw6bg6qVG3Wm6QwAQMLcFPgpOJ6U-ltfYsFqYIrp08Lmu";
 
-    fetch(webhookUrl, { 
-        method: "POST", 
-        headers: { "Content-Type": "application/json" }, 
-        body: JSON.stringify({ 
-            content: `**Von:** ${discordName}\n**Unternehmen:** ${selectedCompany}\n**Idee:** ${idea}` 
-        })
-    })
-    .then(response => {
-        if (response.ok) {
-            document.getElementById("successMessage").style.display = "block";
+            fetch(webhookUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    content: `**Von:** ${discordName}\n**Unternehmen:** ${selectedCompany}\n**Idee:** ${idea}`
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById("successMessage").style.display = "block";
 
-            // **Neu: Formular leeren**
-            document.getElementById("ideaForm").reset();
+                        // **Neu: Formular leeren**
+                        document.getElementById("ideaForm").reset();
 
-            setTimeout(() => document.getElementById("successMessage").style.display = "none", 4000);
-        } else {
-            alert(currentLang === 'de' ? "Es gab einen Fehler beim Senden der Idee." : "There was an error submitting your idea.");
+                        setTimeout(() => document.getElementById("successMessage").style.display = "none", 4000);
+                    } else {
+                        alert(currentLang === 'de' ? "Es gab einen Fehler beim Senden der Idee." : "There was an error submitting your idea.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Fehler beim Senden an Discord:", error);
+                    alert(currentLang === 'de' ? "Es gab einen Fehler beim Senden der Idee." : "There was an error submitting your idea.");
+                });
+
+            remainingTime = cooldownTime;
+            startCountdown();
         }
-    })
-    .catch(error => {
-        console.error("Fehler beim Senden an Discord:", error);
-        alert(currentLang === 'de' ? "Es gab einen Fehler beim Senden der Idee." : "There was an error submitting your idea.");
-    });
 
-    remainingTime = cooldownTime;
-    startCountdown();
-}
-        
         function startCountdown() {
             const button = document.getElementById("submitButton");
             const cooldownContainer = document.getElementById("cooldownContainer");
             const cooldownBar = document.getElementById("cooldownBar");
 
             const updateCooldownBar = () => {
-            let minutes = Math.floor(remainingTime / 60);
-            let seconds = remainingTime % 60;
-            let formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-            cooldownBar.innerText = formattedTime;
-            cooldownBar.style.width = `${(remainingTime / cooldownTime) * 100}%`;
-            cooldownContainer.style.display = cooldown ? "block" : "none";
-            localStorage.setItem('cooldownTime', remainingTime); // Cooldown speichern
-    };
+                let minutes = Math.floor(remainingTime / 60);
+                let seconds = remainingTime % 60;
+                let formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                cooldownBar.innerText = formattedTime;
+                cooldownBar.style.width = `${(remainingTime / cooldownTime) * 100}%`;
+                cooldownContainer.style.display = cooldown ? "block" : "none";
+                localStorage.setItem('cooldownTime', remainingTime); // Cooldown speichern
+            };
 
-        countdownInterval = setInterval(() => {
-        if (remainingTime <= 0) {
-            clearInterval(countdownInterval);
-            cooldown = false;
-            button.disabled = false;
-            button.innerText = currentLang === 'de' ? "Absenden" : "Submit";
-            cooldownContainer.style.display = "none";
-            localStorage.removeItem('cooldownTime'); // Cooldown zurücksetzen
-        } else {
-            remainingTime--;
-            updateCooldownBar();
+            countdownInterval = setInterval(() => {
+                if (remainingTime <= 0) {
+                    clearInterval(countdownInterval);
+                    cooldown = false;
+                    button.disabled = false;
+                    button.innerText = currentLang === 'de' ? "Absenden" : "Submit";
+                    cooldownContainer.style.display = "none";
+                    localStorage.removeItem('cooldownTime'); // Cooldown zurücksetzen
+                } else {
+                    remainingTime--;
+                    updateCooldownBar();
+                }
+            }, 1000);
+            updateCooldownBar(); // Initiales Update
         }
-    }, 1000);
-    updateCooldownBar(); // Initiales Update
-    }
 
-    document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", () => {
             const button = document.getElementById("submitButton");
 
             if (remainingTime > 0 && remainingTime < cooldownTime) {
@@ -391,9 +422,5 @@
         });
     </script>
 </body>
+
 </html>
-
-
-
-
-

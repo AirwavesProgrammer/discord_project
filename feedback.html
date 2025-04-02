@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,11 +23,13 @@
             flex-direction: column;
             text-align: center;
             position: relative;
-            padding: 0 10px; /* Padding für kleinere Geräte */
+            padding: 0 10px;
+            /* Padding für kleinere Geräte */
         }
 
         .form-container {
-            background: rgba(255, 255, 255, 0.1); /* Transparenter Container */
+            background: rgba(255, 255, 255, 0.1);
+            /* Transparenter Container */
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -55,7 +58,9 @@
             color: white;
         }
 
-        select, input, textarea {
+        select,
+        input,
+        textarea {
             width: 100%;
             padding: 10px;
             margin: 8px 0 15px;
@@ -67,7 +72,9 @@
             transition: border-color 0.3s;
         }
 
-        select:focus, input:focus, textarea:focus {
+        select:focus,
+        input:focus,
+        textarea:focus {
             border-color: #7289DA;
             outline: none;
         }
@@ -94,60 +101,190 @@
         }
 
         textarea {
-            height: 120px;  /* Reduzierte Höhe für Textarea */
+            height: 120px;
+            /* Reduzierte Höhe für Textarea */
             resize: none;
         }
 
-        /* Media Queries für verschiedene Bildschirmgrößen */
+        .language-switch {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #7289DA;
+            transition: .4s;
+            border-radius: 25px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "\1F1E9\1F1EA";
+            /* German Flag */
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 2px;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #5b6eae;
+        }
+
+        input:checked+.slider:before {
+            content: "\1F1EC\1F1E7";
+            /* UK Flag */
+            transform: translateX(25px);
+        }
+
+        /* Hamburger Menu Icon */
+        .menu-icon {
+            width: 35px;
+            height: 25px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-icon div {
+            height: 3px;
+            background-color: #EAEAEA;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Menü */
+        .menu {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background-color: rgba(35, 57, 91, 0.9);
+            width: 250px;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 99;
+        }
+
+        .menu a {
+            display: block;
+            padding: 15px;
+            color: #EAEAEA;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .menu a:hover {
+            transform: scale(1.1);
+            background-color: #00ADB5;
+        }
+
+        .menu.open {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .menu-icon.open div:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-icon.open div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-icon.open div:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .menu-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .menu a:hover {
+            transform: scale(1.1);
+            background-color: #00ADB5;
+        }
+
         @media (max-width: 768px) {
-            h2 {
-                font-size: 1.8rem; /* Kleinere Schriftgröße für Tablets */
-            }
-
-            select, input, textarea {
-                font-size: 0.9rem; /* Etwas kleinere Schriftgrößen für mobile Geräte */
-                padding: 8px; /* Weniger Padding für kleinere Geräte */
-            }
-
-            button {
-                font-size: 1rem; /* Kleinere Schriftgröße für den Button */
-                padding: 8px 18px; /* Weniger Padding für den Button */
-            }
-
-            .form-container {
-                max-width: 90%; /* Container soll fast die ganze Breite einnehmen */
-                padding: 15px;
-            }
+            h2 { font-size: 1.8rem; }
+            select, input, textarea { font-size: 0.9rem; padding: 10px; }
+            button { font-size: 1rem; padding: 10px; }
+            .form-container { max-width: 90%; padding: 15px; }
         }
 
         @media (max-width: 480px) {
-            h2 {
-                font-size: 1.6rem; /* Noch kleinere Schriftgröße für kleinere Bildschirme */
-            }
-
-            select, input, textarea {
-                font-size: 0.85rem; /* Kleinere Schriftgröße für noch kleinere Bildschirme */
-                padding: 6px; /* Weniger Padding */
-            }
-
-            button {
-                font-size: 0.95rem;
-                padding: 6px 16px; /* Weniger Padding für den Button */
-            }
-
-            .form-container {
-                max-width: 95%; /* Fast die gesamte Breite auf sehr kleinen Bildschirmen */
-                padding: 10px;
-            }
+            h2 { font-size: 1.6rem; }
+            select, input, textarea { font-size: 0.85rem; padding: 8px; }
+            button { font-size: 0.95rem; padding: 8px; }
+            .form-container { max-width: 95%; padding: 12px; }
+            .menu-icon { display: block; }
         }
     </style>
 </head>
+
 <body>
+    <div class="language-switch">
+        <label class="switch">
+            <input type="checkbox" id="languageToggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <!-- Hamburger Menu Icon -->
+    <div class="menu-icon" id="menuIcon">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Menü -->
+    <div class="menu" id="menu">
+        <a href="index.html" data-menu="home">Homepage</a>
+        <a href="server.html" data-menu="server">Serverinfo</a>
+        <a href="submission.html" data-menu="submission">Idee einreichen</a>
+        <a href="feedback.html" data-menu="feedback">Feedback</a>
+    </div>
+
     <div class="form-container">
-        <h2>Website-Feedback</h2>
+        <h2 id="formTitle">Website-Feedback</h2>
         <form id="feedbackForm">
-            <label for="design">Design der Website:</label>
-            <select id="design" name="design">
+            <label for="design" data-lang="design">Design der Website:</label>
+            <select id="design" name="design" data-select="design">
                 <option value="5">5 - Ausgezeichnet</option>
                 <option value="4">4 - Gut</option>
                 <option value="3">3 - Durchschnittlich</option>
@@ -155,8 +292,8 @@
                 <option value="1">1 - Sehr schlecht</option>
             </select>
 
-            <label for="usability">Benutzerfreundlichkeit:</label>
-            <select id="usability" name="usability">
+            <label for="usability" data-lang="usability">Benutzerfreundlichkeit:</label>
+            <select id="usability" name="usability" data-select="usability">
                 <option value="5">5 - Ausgezeichnet</option>
                 <option value="4">4 - Gut</option>
                 <option value="3">3 - Durchschnittlich</option>
@@ -164,24 +301,107 @@
                 <option value="1">1 - Sehr schlecht</option>
             </select>
 
-            <label for="bugs">Bugs melden:</label>
-            <textarea id="bugs" name="bugs" placeholder="Beschreibe gefundene Fehler..."></textarea>
+            <label for="bugs" data-lang="bugs">Bugs melden:</label>
+            <textarea id="bugs" name="bugs" placeholder="Beschreibe gefundene Fehler..."
+                data-placeholder="bugs"></textarea>
 
-            <label for="ideas">Ideen für Verbesserungen:</label>
-            <textarea id="ideas" name="ideas" placeholder="Hast du Vorschläge zur Verbesserung?"></textarea>
+            <label for="ideas" data-lang="ideas">Ideen für Verbesserungen:</label>
+            <textarea id="ideas" name="ideas" placeholder="Hast du Vorschläge zur Verbesserung?"
+                data-placeholder="ideas"></textarea>
 
-            <label for="feedback">Zusätzliches Feedback:</label>
-            <textarea id="feedback" name="feedback" placeholder="Dein Feedback..." required></textarea>
+            <label for="feedback" data-lang="feedback">Zusätzliches Feedback:</label>
+            <textarea id="feedback" name="feedback" placeholder="Dein Feedback..." required
+                data-placeholder="feedback"></textarea>
 
-            <label for="name">Dein Name (optional):</label>
+            <label for="name" data-lang="name">Dein Name (optional):</label>
             <input type="text" id="name" name="name">
 
-            <button type="submit">Feedback senden</button>
+            <button type="submit" id="submitButton">Feedback senden</button>
         </form>
     </div>
 
     <script>
-        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        const translations = {
+            de: {
+                formTitle: "Website-Feedback",
+                design: "Design der Website:",
+                usability: "Benutzerfreundlichkeit:",
+                bugs: "Bugs melden:",
+                ideas: "Ideen für Verbesserungen:",
+                feedback: "Zusätzliches Feedback:",
+                name: "Dein Name (optional):",
+                submitButton: "Feedback senden",
+                placeholders: {
+                    bugs: "Beschreibe gefundene Fehler...",
+                    ideas: "Hast du Vorschläge zur Verbesserung?",
+                    feedback: "Dein Feedback..."
+                },
+                select: {
+                    design: ["5 - Ausgezeichnet", "4 - Gut", "3 - Durchschnittlich", "2 - Schlecht", "1 - Sehr schlecht"],
+                    usability: ["5 - Ausgezeichnet", "4 - Gut", "3 - Durchschnittlich", "2 - Schlecht", "1 - Sehr schlecht"]
+                },
+                menu: {
+                    home: "Homepage",
+                    server: "Serverinfo",
+                    submission: "Idee einreichen",
+                    feedback: "Feedback"
+                }
+            },
+            en: {
+                formTitle: "Website Feedback",
+                design: "Website Design:",
+                usability: "Usability:",
+                bugs: "Report Bugs:",
+                ideas: "Ideas for Improvement:",
+                feedback: "Additional Feedback:",
+                name: "Your Name (optional):",
+                submitButton: "Send Feedback",
+                placeholders: {
+                    bugs: "Describe any bugs found...",
+                    ideas: "Do you have any suggestions for improvement?",
+                    feedback: "Your feedback..."
+                },
+                select: {
+                    design: ["5 - Excellent", "4 - Good", "3 - Average", "2 - Poor", "1 - Very Poor"],
+                    usability: ["5 - Excellent", "4 - Good", "3 - Average", "2 - Poor", "1 - Very Poor"]
+                },
+                menu: {
+                    home: "Homepage",
+                    server: "About Server",
+                    submission: "Submit Idea",
+                    feedback: "Feedback"
+                }
+            }
+        };
+
+        document.getElementById("languageToggle").addEventListener("change", function () {
+            const language = this.checked ? "en" : "de";
+            document.getElementById("formTitle").textContent = translations[language].formTitle;
+            document.getElementById("submitButton").textContent = translations[language].submitButton;
+
+            document.querySelectorAll("[data-lang]").forEach(el => {
+                el.textContent = translations[language][el.getAttribute("data-lang")];
+            });
+
+            document.querySelectorAll("[data-placeholder]").forEach(el => {
+                el.placeholder = translations[language].placeholders[el.getAttribute("data-placeholder")];
+            });
+
+            document.querySelectorAll("[data-select]").forEach(select => {
+                const key = select.getAttribute("data-select");
+                select.querySelectorAll("option").forEach((option, index) => {
+                    option.textContent = translations[language].select[key][index];
+                });
+            });
+
+            document.querySelectorAll("[data-menu]").forEach(el => {
+                el.textContent = translations[language].menu[el.getAttribute("data-menu")];
+            });
+        });
+
+
+
+        document.getElementById('feedbackForm').addEventListener('submit', function (e) {
             e.preventDefault(); // Verhindert die Standardformularübermittlung
 
             // Hole die Formulardaten
@@ -219,23 +439,25 @@
                 },
                 body: JSON.stringify(message)
             })
-            .then(response => {
-                if (response.ok) {
-                    alert("Feedback erfolgreich gesendet!");
-                    e.target.reset(); // Formular zurücksetzen
-                } else {
-                    alert("Es gab ein Problem beim Senden deines Feedbacks.");
-                }
-            })
-            .catch(error => {
-                console.error("Fehler:", error);
-                alert("Fehler beim Senden des Feedbacks.");
-            });
+                .then(response => {
+                    if (response.ok) {
+                        alert("Feedback erfolgreich gesendet!");
+                        e.target.reset(); // Formular zurücksetzen
+                    } else {
+                        alert("Es gab ein Problem beim Senden deines Feedbacks.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Fehler:", error);
+                    alert("Fehler beim Senden des Feedbacks.");
+                });
+        });
+
+        document.getElementById("menuIcon").addEventListener("click", function () {
+            this.classList.toggle("open");
+            document.getElementById("menu").classList.toggle("open");
         });
     </script>
 </body>
+
 </html>
-
-
-
-

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Justice for EH</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
-    
+
         body {
             font-family: 'Arial', sans-serif;
             background-color: #1A1A2E;
@@ -34,16 +35,20 @@
 
         .discord-logo {
             position: absolute;
-            left: 20px; /* Positioniere das Logo 20px von der linken Seite */
+            left: 20px;
+            /* Positioniere das Logo 20px von der linken Seite */
             top: 50%;
-            transform: translateY(-50%); /* Vertikale Zentrierung */
-            width: 60px; /* Größe des Logos */
+            transform: translateY(-50%);
+            /* Vertikale Zentrierung */
+            width: 60px;
+            /* Größe des Logos */
             height: auto;
         }
 
         header .header-text {
             position: relative;
-            display: inline-block; /* Damit der Text zentriert wird */
+            display: inline-block;
+            /* Damit der Text zentriert wird */
         }
 
         header .header-text h1 {
@@ -53,7 +58,8 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             font-family: 'Orbitron', sans-serif;
-            margin-bottom: 15px; /* Abstand zum Unterstrich */
+            margin-bottom: 15px;
+            /* Abstand zum Unterstrich */
         }
 
         /* Attraktiver blauer Unterstrich */
@@ -62,15 +68,18 @@
             display: block;
             width: 0%;
             height: 4px;
-            background-color: #00ADB5; /* Blauer Unterstrich */
+            background-color: #00ADB5;
+            /* Blauer Unterstrich */
             margin: 0 auto;
-            transition: width 0.3s ease; /* Sanfte Transition beim Hover */
+            transition: width 0.3s ease;
+            /* Sanfte Transition beim Hover */
             border-radius: 2px;
         }
 
         /* Hover-Effekt für den Unterstrich */
         header .header-text:hover::after {
-            width: 100%; /* Vergrößert den Unterstrich auf 100% der Breite */
+            width: 100%;
+            /* Vergrößert den Unterstrich auf 100% der Breite */
         }
 
         /* Hamburger Menu Icon */
@@ -81,7 +90,8 @@
             position: absolute;
             top: 60px;
             right: 20px;
-            z-index: 100; /* Höherer z-index, damit das Icon über anderen Elementen ist */
+            z-index: 100;
+            /* Höherer z-index, damit das Icon über anderen Elementen ist */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -99,9 +109,11 @@
         /* Menü */
         .menu {
             position: absolute;
-            top: 120px; /* Position unter dem Header */
+            top: 120px;
+            /* Position unter dem Header */
             right: 20px;
-            background-color: rgba(35, 57, 91, 0.9); /* Leichte Transparenz */
+            background-color: rgba(35, 57, 91, 0.9);
+            /* Leichte Transparenz */
             width: 250px;
             display: none;
             border-radius: 10px;
@@ -109,7 +121,8 @@
             opacity: 0;
             transform: translateY(-20px);
             transition: opacity 0.3s ease, transform 0.3s ease;
-            z-index: 99; /* Menü sollte über anderem Inhalt, aber unter dem Icon sein */
+            z-index: 99;
+            /* Menü sollte über anderem Inhalt, aber unter dem Icon sein */
         }
 
         /* Menü Links */
@@ -125,8 +138,10 @@
 
         /* Hover-Effekt für Links */
         .menu a:hover {
-            transform: scale(1.1); /* Herauszoomen */
-            background-color: #00ADB5; /* Neue Hintergrundfarbe */
+            transform: scale(1.1);
+            /* Herauszoomen */
+            background-color: #00ADB5;
+            /* Neue Hintergrundfarbe */
         }
 
         /* Menü anzeigen, wenn es geöffnet ist */
@@ -138,26 +153,32 @@
 
         /* Hamburger Menu Animation (öffnet sich zu einem X) */
         .menu-icon.open div:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px); /* Erstes Line wird zur oberen Ecke */
+            transform: rotate(45deg) translate(5px, 5px);
+            /* Erstes Line wird zur oberen Ecke */
         }
 
         .menu-icon.open div:nth-child(2) {
-            opacity: 0; /* Zweite Linie verschwindet */
+            opacity: 0;
+            /* Zweite Linie verschwindet */
         }
 
         .menu-icon.open div:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px); /* Dritte Linie wird zur unteren Ecke */
+            transform: rotate(-45deg) translate(5px, -5px);
+            /* Dritte Linie wird zur unteren Ecke */
         }
 
         /* Hover-Effekt auf das Menü-Icon */
         .menu-icon:hover {
-            transform: scale(1.1);  /* Zoomt das Menü-Icon leicht */
+            transform: scale(1.1);
+            /* Zoomt das Menü-Icon leicht */
         }
 
         /* Hover-Effekt auf die einzelnen Links */
         .menu a:hover {
-        transform: scale(1.1); /* Herauszoomen */
-        background-color: #00ADB5; /* Hintergrundfarbe ändern */
+            transform: scale(1.1);
+            /* Herauszoomen */
+            background-color: #00ADB5;
+            /* Hintergrundfarbe ändern */
         }
 
         /* Für die Mission Sektion */
@@ -205,7 +226,7 @@
             transform: scale(1.1);
             border: 2px solid #00ADB5;
         }
-        
+
         .hero {
             position: relative;
             margin-top: 50px;
@@ -236,8 +257,10 @@
         }
 
         .hero-text .hover-underline {
-            font-size: 2rem;  /* Setzt die Schriftgröße */
-            color: #ffffff;  /* Textfarbe */
+            font-size: 2rem;
+            /* Setzt die Schriftgröße */
+            color: #ffffff;
+            /* Textfarbe */
             position: relative;
             display: inline-block;
         }
@@ -248,27 +271,31 @@
             position: absolute;
             width: 100%;
             height: 2px;
-            background: linear-gradient(to right, #ff0000, #00ffff);  /* Farbverlauf von Rot nach Cyan */
+            background: linear-gradient(to right, #ff0000, #00ffff);
+            /* Farbverlauf von Rot nach Cyan */
             bottom: -5px;
             left: 0;
             transform: scaleX(0);
             transform-origin: right;
             transition: transform 0.4s ease-out;
-        }   
+        }
 
         .hero-text .hover-underline::before {
             top: -5px;
-        transform-origin: left;
+            transform-origin: left;
         }
 
         .hero-text .hover-underline:hover::after,
         .hero-text .hover-underline:hover::before {
-            transform: scaleX(1);  /* Aktiviert die Unterstreichung beim Hover */
+            transform: scaleX(1);
+            /* Aktiviert die Unterstreichung beim Hover */
         }
 
         .hero-text:hover {
-            background-color: rgba(0, 173, 181, 0.8);  /* Intensiviert die Hintergrundfarbe */
-            transform: translate(-50%, -50%) scale(1.05);  /* Skalierung bei Hover */
+            background-color: rgba(0, 173, 181, 0.8);
+            /* Intensiviert die Hintergrundfarbe */
+            transform: translate(-50%, -50%) scale(1.05);
+            /* Skalierung bei Hover */
         }
 
         .hover-underline {
@@ -301,7 +328,7 @@
         .hover-underline:hover::before {
             transform: scaleX(1);
         }
-    
+
         .container {
             max-width: 900px;
             margin: 40px auto;
@@ -359,8 +386,10 @@
         /* Button Styling */
         .button {
             display: inline-flex;
-            align-items: center;  /* Vertikale Zentrierung */
-            justify-content: center;  /* Horizontale Zentrierung */
+            align-items: center;
+            /* Vertikale Zentrierung */
+            justify-content: center;
+            /* Horizontale Zentrierung */
             padding: 15px 25px;
             margin-top: 30px;
             background: #00ADB5;
@@ -381,14 +410,17 @@
 
         /* Discord Icon */
         .button .discord-icon {
-            font-size: 24px; /* Größe des Discord-Icons */
+            font-size: 24px;
+            /* Größe des Discord-Icons */
             transition: transform 0.3s ease;
-            margin-right: 12px;  /* Erhöhter Abstand zwischen Icon und Text */
+            margin-right: 12px;
+            /* Erhöhter Abstand zwischen Icon und Text */
         }
 
         /* Vergrößern des Discord-Icons beim Hover */
         .button:hover .discord-icon {
-            transform: scale(1.1);  /* Leichtes Herauszoomen beim Hover */
+            transform: scale(1.1);
+            /* Leichtes Herauszoomen beim Hover */
         }
 
         /* Button Text */
@@ -401,141 +433,149 @@
         .button:hover span {
             transform: scale(1.1);
         }
-        
+
         @media (max-width: 1024px) {
             .hero-text {
-            font-size: 28px;
-            padding: 15px 25px;
-        }
+                font-size: 28px;
+                padding: 15px 25px;
+            }
 
-        .menu {
-            width: 200px; /* Kleineres Menü */
-        }
+            .menu {
+                width: 200px;
+                /* Kleineres Menü */
+            }
         }
 
         @media (max-width: 768px) {
-        
-        header {
-            position: relative;
-            text-align: center;
+
+            header {
+                position: relative;
+                text-align: center;
+            }
+
+            .discord-logo {
+                display: none;
+                /* Versteckt das Logo auf mobilen Geräten */
+            }
+
+            /* Menü im mobilen Bereich */
+            .menu {
+                position: absolute;
+                top: 80px;
+                right: 20px;
+                background-color: rgba(35, 57, 91, 0.9);
+                width: 250px;
+                display: none;
+                border-radius: 10px;
+                box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                z-index: 99;
+            }
+
+            /* Menü-Links für Mobilgeräte */
+            .menu a {
+                padding: 15px;
+                color: #EAEAEA;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            /* Menü anzeigen, wenn es geöffnet wird */
+            .menu.open {
+                display: block;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Hamburger-Icon in eine "X" umwandeln */
+            .menu-icon.open div:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-icon.open div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-icon.open div:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            /* Menüpunkte vergrößern beim Hover */
+            .menu a:hover {
+                transform: scale(1.1);
+                background-color: #00ADB5;
+            }
+
+            .highlight {
+                flex-direction: column;
+                /* Elemente untereinander anordnen */
+                gap: 15px;
+                /* Abstand zwischen den Bereichen */
+                align-items: center;
+                /* Zentriert die Boxen auf der Seite */
+            }
+
+            .highlight>div {
+                width: 100%;
+                /* Volle Breite für mobiles Layout */
+                max-width: 400px;
+                /* Optional: Maximale Breite für eine bessere Optik */
+            }
+
+            .countdown {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            .hero-text {
+                display: none !important;
+            }
         }
 
-        .discord-logo {
-            display: none; /* Versteckt das Logo auf mobilen Geräten */
-        }
+        @media (max-width: 480px) {
+            header {
+                padding: 20px;
+                font-size: 24px;
+            }
 
-        /* Menü im mobilen Bereich */
-        .menu {
-            position: absolute;
-            top: 80px;
-            right: 20px;
-            background-color: rgba(35, 57, 91, 0.9);
-            width: 250px;
-            display: none;
-            border-radius: 10px;
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            z-index: 99;
-        }
+            .hero img {
+                height: 200px;
+            }
 
-        /* Menü-Links für Mobilgeräte */
-        .menu a {
-            padding: 15px;
-            color: #EAEAEA;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-        }
+            .hero-text {
+                font-size: 20px;
+                padding: 10px 15px;
+            }
 
-        /* Menü anzeigen, wenn es geöffnet wird */
-        .menu.open {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
+            .mission-section h2 {
+                font-size: 28px;
+            }
 
-        /* Hamburger-Icon in eine "X" umwandeln */
-        .menu-icon.open div:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
+            .mission-section p {
+                font-size: 16px;
+            }
 
-        .menu-icon.open div:nth-child(2) {
-            opacity: 0;
-        }
+            .button {
+                font-size: 16px;
+                padding: 12px 20px;
+            }
 
-        .menu-icon.open div:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+            .menu-icon {
+                width: 28px;
+            }
         }
-
-        /* Menüpunkte vergrößern beim Hover */
-        .menu a:hover {
-            transform: scale(1.1);
-            background-color: #00ADB5;
-        }
-
-        .highlight {
-            flex-direction: column; /* Elemente untereinander anordnen */
-            gap: 15px; /* Abstand zwischen den Bereichen */
-            align-items: center; /* Zentriert die Boxen auf der Seite */
-        }
-
-        .highlight > div {
-            width: 100%; /* Volle Breite für mobiles Layout */
-            max-width: 400px; /* Optional: Maximale Breite für eine bessere Optik */
-        }
-
-        .countdown {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .hero-text {
-        display: none !important;
-        }
-    }
-
-    @media (max-width: 480px) {
-        header {
-            padding: 20px;
-            font-size: 24px;
-        }
-
-        .hero img {
-            height: 200px;
-        }
-
-        .hero-text {
-            font-size: 20px;
-            padding: 10px 15px;
-        }
-
-        .mission-section h2 {
-            font-size: 28px;
-        }
-
-        .mission-section p {
-            font-size: 16px;
-        }
-
-        .button {
-            font-size: 16px;
-            padding: 12px 20px;
-        }
-
-        .menu-icon {
-            width: 28px;
-        }
-    }
-    </style>    
+    </style>
 </head>
 
 <body>
     <header>
-        <img src="https://media.discordapp.net/attachments/1353786567810089051/1356356039980879942/Logo.png?ex=67eced3f&is=67eb9bbf&hm=c4647d2902b2547e70ae5d3a6d1f9a3bfb0d9cc2d6fe6aa3e61a8d6f4b779302&=&format=webp&quality=lossless&width=908&height=908" alt="Discord Logo" class="discord-logo">
+        <img src="https://media.discordapp.net/attachments/1353786567810089051/1356356039980879942/Logo.png?ex=67eced3f&is=67eb9bbf&hm=c4647d2902b2547e70ae5d3a6d1f9a3bfb0d9cc2d6fe6aa3e61a8d6f4b779302&=&format=webp&quality=lossless&width=908&height=908"
+            alt="Discord Logo" class="discord-logo">
         <div class="header-text">
             <h1>Gerechtigkeit für EH</h1>
         </div>
@@ -559,7 +599,8 @@
 
     <!-- Hero Section -->
     <div class="hero">
-        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Femergency-hamburg.com%2Fimg%2Fplay-card.png&f=1&nofb=1&ipt=3133b1d55a3c69391c1448eb3fcdd032130616a4230117dbd12121cbafbdea79&ipo=images" alt="Protest Banner">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Femergency-hamburg.com%2Fimg%2Fplay-card.png&f=1&nofb=1&ipt=3133b1d55a3c69391c1448eb3fcdd032130616a4230117dbd12121cbafbdea79&ipo=images"
+            alt="Protest Banner">
         <div class="hero-text">
             <span class="hover-underline">Zusammen für Gerechtigkeit</span>
         </div>
@@ -568,7 +609,9 @@
     <div class="container">
         <div class="mission-section">
             <h2>Unsere Mission</h2>
-            <p>Wir setzen uns in Notruf Hamburg für mehr Inhalte für vernachlässigte Jobs wie ADAC, LKW-Fahrer, Feuerwehr und Busfahrer ein. Wir glauben, dass jeder in seiner Arbeit Anerkennung und Respekt verdient!</p>
+            <p>Wir setzen uns in Notruf Hamburg für mehr Inhalte für vernachlässigte Jobs wie ADAC, LKW-Fahrer,
+                Feuerwehr und Busfahrer ein. Wir glauben, dass jeder in seiner Arbeit Anerkennung und Respekt verdient!
+            </p>
             <a href="https://discord.gg/8BEkPkjtKe" class="button" target="_blank">Jetzt mitmachen</a>
         </div>
 
@@ -618,14 +661,14 @@
 
         // Menu toggle
         document.querySelector('.menu-icon').addEventListener('click', function () {
-        const menu = document.querySelector('.menu');
-        const icon = document.querySelector('.menu-icon');
+            const menu = document.querySelector('.menu');
+            const icon = document.querySelector('.menu-icon');
 
-        // Toggle the menu visibility
-        menu.classList.toggle('open');
-    
-        // Toggle the icon transformation (hamburger to X)
-        icon.classList.toggle('open');
+            // Toggle the menu visibility
+            menu.classList.toggle('open');
+
+            // Toggle the icon transformation (hamburger to X)
+            icon.classList.toggle('open');
         });
 
         // Mitgliederzähler (simulierte Erhöhung bis 50+)
@@ -658,15 +701,5 @@
         }
     </script>
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
