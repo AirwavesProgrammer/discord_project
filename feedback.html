@@ -240,70 +240,54 @@
             background-color: #00ADB5;
         }
 
+        /* Für mobile Geräte */
         @media (max-width: 768px) {
-            h2 {
-                font-size: 1.8rem;
-            }
-
-            select,
-            input,
-            textarea {
-                font-size: 0.9rem;
-                padding: 8px;
-            }
-
-            button {
-                font-size: 1rem;
-                padding: 10px;
-            }
-
-            .form-container {
-                max-width: 90%;
-                padding: 15px;
-            }
-
             .menu {
-                width: 200px;
+                width: 220px;
+                /* Weniger Breite für mobile Geräte */
+                height: auto;
+                /* Höhe anpassen */
+                top: 50px;
+                /* Position nach oben verschieben */
             }
 
             .menu a {
-                font-size: 16px;
+                padding: 12px;
+                font-size: 1.1rem;
+                text-align: left;
+                display: block;
+            }
+
+            /* Button-Größe und Layout für mobile Geräte */
+            button {
+                font-size: 1rem;
+                padding: 12px;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                margin-top: 90px;
+                /* Mehr Abstand nach oben für mobile Geräte */
             }
         }
 
+        /* Anpassungen für sehr kleine mobile Geräte */
         @media (max-width: 480px) {
-            h2 {
-                font-size: 1.6rem;
-            }
-
-            select,
-            input,
-            textarea {
-                font-size: 0.85rem;
-                padding: 6px;
-            }
-
-            button {
-                font-size: 0.95rem;
-                padding: 8px;
-            }
-
-            .form-container {
-                max-width: 95%;
-                padding: 12px;
-            }
-
             .menu {
-                width: 180px;
+                width: 200px;
+                /* Noch weniger Breite auf kleineren Geräten */
+                top: 40px;
+                /* Noch mehr Abstand nach oben */
             }
 
             .menu a {
-                font-size: 14px;
-                padding: 12px;
+                font-size: 1rem;
             }
 
-            .menu-icon {
-                display: block;
+            h2 {
+                font-size: 1.6rem;
+                margin-top: 100px;
+                /* Noch mehr Abstand */
             }
         }
     </style>
